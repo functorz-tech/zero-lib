@@ -1,0 +1,48 @@
+plugins {
+    id 'java-library'
+}
+
+group 'com.functorz'
+version '1.0'
+
+sourceCompatibility = 1.11
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    // configuration that holds jars to include in the jar
+    extraLibs
+}
+
+dependencies {
+    implementation 'org.postgresql:postgresql:42.2.19'
+    implementation 'org.springframework:spring-jdbc:5.3.5'
+    implementation 'org.springframework:spring-context:5.3.5'
+    implementation 'org.springframework:spring-websocket:5.3.5'
+    implementation 'org.springframework:spring-webflux:5.3.5'
+    extraLibs 'org.apache.commons:commons-lang3:3.8.1'
+    extraLibs 'org.reflections:reflections:0.9.11'
+    extraLibs 'com.google.guava:guava:27.0-jre'
+    extraLibs 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
+    extraLibs 'com.impossibl.pgjdbc-ng:pgjdbc-ng:0.8.6'
+    extraLibs 'com.graphql-java:graphql-java:16.1'
+    extraLibs 'org.jooq:jooq:3.14.3'
+    extraLibs 'commons-io:commons-io:2.6'
+    extraLibs 'io.leangen.graphql:spqr:0.10.0'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+    testCompileOnly 'org.projectlombok:lombok:1.18.2'
+    configurations.compile.extendsFrom(configurations.extraLibs)
+
+    testImplementation 'junit:junit:4.13'
+}
+
+jar {
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
