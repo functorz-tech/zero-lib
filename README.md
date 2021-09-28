@@ -1,8 +1,8 @@
-# 一、Intro
+## 1. Intro
 
 **Zero-lib** is a library which aims to generate **GraphQL Schema** using PostgresQL Database schema.
 
-## 二、Config
+## 2. Config
 
 PostgresQL Database schema example:
 
@@ -422,7 +422,7 @@ public class RelationMetadata {
 }
 ```
 
-## 三、Dependency
+## 3. Dependency
 
 ```java
 package com.example.demo.configuration;
